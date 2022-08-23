@@ -30,7 +30,9 @@ addOne(1) //=> 2
 addOne(-5) //=> -4
 -----------------------------------------------------------------*/
 // Your solution for 01-addOne here:
-function addOne(num) {}
+function addOne(num) {
+  return num + 1
+}
 /*-----------------------------------------------------------------
 Challenge: 02-addTwoNumbers
 
@@ -49,8 +51,13 @@ addTwoNumbers(0, 0) //=> 0
 addTwoNumbers('Hello', 5) //=> NaN
 -----------------------------------------------------------------*/
 // Your solution for 02-addTwoNumbers here:
-function addTwoNumbers(num1, num2) {}
-/*-----------------------------------------------------------------
+function addTwoNumbers(num1, num2) {
+  if (typeof num1 === 'number' && typeof num2 === 'number') {
+    return num1 + num2
+  } else {
+    return NaN
+  }
+}/*-----------------------------------------------------------------
 Challenge: 03-sumNumbers
 
 Difficulty: Basic  
@@ -68,8 +75,13 @@ sumNumbers([2, 10, -5]) //=> 7
 sumNumbers([]) //=> 0
 -----------------------------------------------------------------*/
 // Your solution for 03-sumNumbers here:
-function sumNumbers(nums) {}
-/*-----------------------------------------------------------------
+function sumNumbers(nums) {
+  var sum = 0
+  for (var i = 0; i < nums.length; i++) {
+    sum += nums[i]
+  }
+  return sum
+}/*-----------------------------------------------------------------
 Challenge: 04-addList
 
 Difficulty: Basic
@@ -87,8 +99,13 @@ add(1,50,1.23) //=> 52.23
 add(7,-12) //=> -5
 -----------------------------------------------------------------*/
 // Your solution for 04-addList here:
-function addList() {}
-/*-----------------------------------------------------------------
+function addList() {
+  var sum = 0
+  for (var i = 0; i < arguments.length; i++) {
+    sum += arguments[i]
+  }
+  return sum
+}/*-----------------------------------------------------------------
 Challenge: 05-computeRemainder
 
 Difficulty: Basic
@@ -107,8 +124,10 @@ computeRemainder(4,0) //=> Infinity
 computeRemainder(10.5, 3) //=> 1.5
 -----------------------------------------------------------------*/
 // Your solution for 05-computeRemainder:
-function computeRemainder(n1, n2) {}
-/*-----------------------------------------------------------------
+function computeRemainder(n1, n2) {
+  if (n2 === 0) return Infinity
+  return n1 - Math.floor(n1 / n2) * n2
+}/*-----------------------------------------------------------------
 Challenge: 06-range
 
 Difficulty: basic
@@ -126,8 +145,16 @@ range(1,1) //=> []
 range(5,2) //=> "First argument must be less than second"
 -----------------------------------------------------------------*/
 // Your solution for 06-range here:
-function range(n1, n2) {}
-/*-----------------------------------------------------------------
+function range(start, finish) {
+  if (start > finish) return 'First argument must be less than second'
+
+  var range = []
+  for (var n = start; n < finish; n++) {
+    range.push(n)
+  }
+
+  return range
+}/*-----------------------------------------------------------------
 Challenge: 07-reverseUpcaseString
 
 Difficulty: Basic
@@ -141,8 +168,15 @@ Examples:
 reverseUpcaseString("SEI Rocks!"); //=> "!SKCOR IES" 
 -----------------------------------------------------------------*/
 // Your solution for 07-reverseUpcaseString here:
-function reverseUpcaseString(string) {}
-/*-----------------------------------------------------------------
+function reverseUpcaseString(str) {
+  var results = ''
+  for (var i = 0; i < str.length; i++) {
+    // can use square brackets to access chars in a string
+    // but using the charAt() method is preferred
+    results = str.charAt(i).toUpperCase() + results
+  }
+  return results
+}/*-----------------------------------------------------------------
 Challenge: 08-removeEnds
 
 Difficulty: Basic
@@ -158,8 +192,14 @@ removeEnds('SEI Rocks!'); //=> "DI Rocks"
 removeEnds('a'); //=> "" (empty string)
 -----------------------------------------------------------------*/
 // Your solution for 08-removeEnds here:
-function removeEnds(string) {}
-/*-----------------------------------------------------------------
+function removeEnds(str) {
+  if (str.length < 3) return ''
+  var result = ''
+  for (var i = 1; i < str.length - 1; i++) {
+    result += str.charAt(i)
+  }
+  return result
+}/*-----------------------------------------------------------------
 Challenge: 09-charCount
 
 Difficulty: Basic
@@ -177,10 +217,22 @@ charCount('hello') //=> { h: 1, e: 1, l: 2, o: 1 }
 charCount('Today is fantastic!') //=> { T: 1, o: 1, d: 1, a: 3, y: 1, ' ': 2, i: 2, s: 2, f: 1, n: 1, t: 2, c: 1, '!': 1 }
 -----------------------------------------------------------------*/
 // Your solution for 09-charCount here:
-function charCount(string) {}
+function charCount(str) {
+  var result = {}
+  for (var i = 0; i < str.length; i++) {
+    var char = str.charAt(i)
+    // already seen this char?
+    if (result[char]) {
+      result[char]++
+    } else {
+      result[char] = 1
+    }
+  }
+  return result
+}
 /*-----------------------------------------------------------------
 Challenge: 10-formatWithPadding
-
+a
 Difficulty: Basic
 
 Prompt:
@@ -199,8 +251,13 @@ formatWithPadding(42, '*', 10); //=> "********42"
 formatWithPadding(1234, '*', 3); //=> "1234"
 -----------------------------------------------------------------*/
 // Your solution for 10-formatWithPadding here:
-function formatWithPadding(n, char, length) {}
-/*-----------------------------------------------------------------
+function formatWithPadding(int, char, length) {
+  var result = int.toFixed(0)
+  while (result.length < length) {
+    result = char + result
+  }
+  return result
+}/*-----------------------------------------------------------------
 Challenge: 11-isPalindrome
 
 Difficulty: Intermediate
@@ -220,7 +277,15 @@ isPalindrome('A nut for a jar of tuna'); //=> true
 isPalindrome(''); //=> true
 -----------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
-function isPalindrome(string) {}
+function isPalindrome(str) {
+  str = str.toLowerCase()
+  // loop to replace spaces
+  while (str.includes(' ')) str = str.replace(' ', '')
+  for (var i = 0; i < Math.floor(str.length / 2); i++) {
+    if (str.charAt(i) !== str.charAt(str.length - i - 1)) return false
+  }
+  return true
+}
 /*-----------------------------------------------------------------
 Challenge: 12-hammingDistance
 
@@ -599,7 +664,18 @@ intersection(['a', 1], [true, 'a', 15]) //=> ['a']
 intersection([1, 'a', true, 1, 1], [true, 1, 'b', 1]) //=> [1, true, 1]
 -----------------------------------------------------------------*/
 // Your solution for 22-intersection here:
-function intersection(arr1, arr2) {}
+function intersection(arr1, arr2) {
+  let newArray = [];
+  for(let i = 0 ; i < arr2.length; i++){
+    for(let j = 0; j < arr2.length; j++){
+      if(arr1[i] === arr2[j]){
+        newArray.push(arr1[i]);
+        break;
+      }
+    }
+  }
+  return newArray;
+}
 /*-----------------------------------------------------------------
 Challenge: 23-balancedBrackets
 
@@ -621,7 +697,18 @@ balancedBrackets( '[(])' ) // => false
 balancedBrackets( '[({}[])]' ) // => true
 -----------------------------------------------------------------*/
 // Your solution for 23-balancedBrackets here:
-function balancedBrackets(string) {}
+function balancedBrackets(string) {
+  for(let i = 0; i < string.length; i++){
+    if(string[i] === '[' && string[i+1] === '}'){return false};
+    if(string[i] === '[' && string[i+1] === ')'){return false};
+    if(string[i] === '{' && string[i+1] === ']'){return false};
+    if(string[i] === '{' && string[i+1] === ')'){return false};
+    if(string[i] === '(' && string[i+1] === '}'){return false};
+    if(string[i] === '(' && string[i+1] === ']'){return false};
+
+    if(i === string.length-1){return true};
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 24-isWinningTicket
 
@@ -647,7 +734,16 @@ isWinningTicket( [ ['ABC', 66], ['dddd', 100], ['Hello', 108] ] ) // => true
 isWinningTicket( [ ['ABC', 66], ['dddd', 15], ['Hello', 108] ] ) // => false
 -----------------------------------------------------------------*/
 // Your solution for 24-isWinningTicket here:
-function isWinningTicket(arr) {}
+function isWinningTicket(arr) {
+  for(let i = 0; i < arguments.length; i++){
+    for(let j = 0; j < arr[i][0].length; j++){
+    if(arr[i][0][j] === String.fromCharCode(arr[i][1])){
+      return true;
+    }
+    }
+  }
+  return false;
+}
 /*-----------------------------------------------------------------
 Challenge: 25-getNumForIP
 
