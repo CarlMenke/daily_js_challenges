@@ -297,7 +297,15 @@ fromPairs([ ['a', 1], ['b', 2], ['c', 3] ]) //=> { a: 1, b: 2, c: 3 }
 fromPairs([ ['name', 'Sam"], ['age', 24], ['name', 'Sally'] ]) //=> { name: "Sally", age: 24 }
 -----------------------------------------------------------------*/
 // Your solution for 14-fromPairs here:
-function fromPairs(arr) {}
+function fromPairs(arr) {
+  let obj = {};
+
+  for(let i = 0; i < arr.length; i++){
+    obj[arr[i][0]] = arr[i][1];
+  }
+
+  return obj;
+}
 /*-----------------------------------------------------------------
 Challenge: 15-mergeObjects
 
@@ -315,7 +323,14 @@ mergeObjects({a: 1, b: 2, c: 3}, {d: 4});  //=> {a: 1, b: 2, c: 3, d: 4}
 mergeObjects({a: 1, b: 2, c: 3}, {d: 4}, {b: 22, d: 44});  //=> {a: 1, b: 22, c: 3, d: 44}
 -----------------------------------------------------------------*/
 // Your solution for 15-mergeObjects here:
-function mergeObjects(obj1, obj2) {}
+function mergeObjects(obj1, obj2) {
+  for(let i = arguments.length ; i > 0; i--){
+    for(const property in arguments[i]){
+        arguments[i-1][property] = arguments[i][property];
+      }
+    }
+    return arguments[0];
+  }
 /*-----------------------------------------------------------------
 Challenge: 16-findHighestPriced
 
@@ -349,7 +364,17 @@ findHighestPriced([
 //=> { sku: 'b2', price: 50 }
 -----------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
-function findHighestPriced(arr) {}
+function findHighestPriced(arr) {
+  let highest = '';
+  let highestPrice = 0;
+  for(let i = 0; i < arr.length; i++){
+    if(arr[i].price > highestPrice){
+      highestPrice = arr[i].price;
+      highest = arr[i];
+    }
+  }
+  return highest;
+}
 /*-----------------------------------------------------------------
 Challenge: 17-mapArray
 
@@ -376,7 +401,12 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 //=> ["1 - rose", "2 - tulip", "3 - daisy"]
 -----------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
-function mapArray(arr, cb) {}
+function mapArray(arr, cb) {
+  for(let j = 0 ; j < arr.length; j++){
+    arr[j] = cb(arr[j], j);
+  }
+  return arr;
+}
 /*-----------------------------------------------------------------
 Challenge: 18-reduceArray
 
