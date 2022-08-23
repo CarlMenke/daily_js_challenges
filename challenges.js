@@ -12,7 +12,9 @@ Examples:
 sayHello() //=> Hello!
 -----------------------------------------------------------------*/
 // Your solution for 00-sayHello (example) here:
-function sayHello() {}
+function sayHello() {
+  return 'Hello!'
+}
 /*-----------------------------------------------------------------
 Challenge: 01-addOne
 
@@ -476,7 +478,21 @@ flatten( [1, [2, [3, [4]]], 1, 'a', ['b', 'c']] );
 //=> [1, 2, 3, 4, 1, 'a', 'b', 'c']
 -----------------------------------------------------------------*/
 // Your solution for 19-flatten here:
-function flatten(arr) {}
+function flatten(arr) {
+  let newArray = [];
+
+
+  const removeOneLayer = (arr) =>{
+    for(let i = 0; i < arr.length; i++ ){
+      if(Array.isArray(arr[i])){
+        removeOneLayer(arr[i])
+      }else(newArray.push(arr[i]))
+    }
+  }
+
+  removeOneLayer(arr);
+  return newArray;
+}
 /*-----------------------------------------------------------------
 Challenge: 20-isPrime
 
@@ -496,7 +512,18 @@ isPrime(29) //=> true
 isPrime(200) //=> false
 -----------------------------------------------------------------*/
 // Your solution for 20-isPrime here:
-function isPrime(n) {}
+function isPrime(n) {
+  if(n != Math.floor(n)){return false}
+  if(n === 1){
+    return false
+  };
+  for(let i = 2; i < Math.floor(n); i++){
+    if(Math.floor(n)%i === 0){
+      return false
+    }
+  }
+  return true;
+}
 /*-----------------------------------------------------------------
 Challenge: 21-primeFactors
 
@@ -520,7 +547,38 @@ primeFactors(105) //=> [3, 5, 7]
 primeFactors(200) //=> [2, 2, 2, 5, 5]
 -----------------------------------------------------------------*/
 // Your solution for 21-primeFactors here:
-function primeFactors(n) {}
+function primeFactors(n) {
+
+  function isPrime(n) {
+    if(n != Math.floor(n)){return false}
+    if(n === 1){
+      return false
+    };
+    for(let i = 2; i < Math.floor(n); i++){
+      if(Math.floor(n)%i === 0){
+        return false
+      }
+    }
+    return true;
+  }
+
+  let newArray = [];
+  if(n != Math.floor(n)){return newArray}
+  if(n === 1){
+    return newArray;
+  };
+
+
+  for(let i = 0; i <= n; i++){
+    if(n%i === 0 && isPrime(i)){
+      newArray.push(i);
+      n = n/i;
+      i = 0;
+    }
+  }
+return newArray;
+
+}
 /*-----------------------------------------------------------------
 Challenge: 22-intersection
 
