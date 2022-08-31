@@ -840,11 +840,8 @@ countTheBits( 65535 )  //=> 16
 // Your solution for 27-countTheBits here:
 function countTheBits(n) {
   let bin = (n >>> 0).toString(2)
-console.log('bin', bin)
   let newBin = bin.split('');
-console.log('newbin ', newBin)
   let newerBin = newBin.filter(num => num === '1');
-  console.log('newer bin ' , newerBin)
 
 
   return newerBin.length 
@@ -859,7 +856,8 @@ Prompt:
 - This challenge uses an imaginary grid where the x coordinate increases when you move 'up' and decreases when you move 'down'.  Similarly, the y coordinate increases when you move 'right' and decreases when you move 'left'.
 - Write a function called gridTrip that accepts two arguments.
 - The first argument is an array containing two integers.  The first represents the starting x position on the grid.  The second integer in the array represents the starting y position.
-- The second argument is a string representing "moves" using the characters 'U', 'D', 'R' & 'L' to represent moving Up, Down, Right & Left respectively.  Each direction character will be followed by digits representing how many units to move in that direction.  For example, a string of 'D15R2U4' represents moving up 15 units, to the right 2 units, and finally, down 4 units.  The direction characters will always be upper case.
+- The second argument is a string representing "moves" using the characters 'U', 'D', 'R' & 'L' to represent moving Up, Down, Right & Left respectively.  Each direction character will be followed by digits representing how many units to move in that direction.  For example, a string of 'D15R2U4'
+ represents moving up 15 units, to the right 2 units, and finally, down 4 units.  The direction characters will always be upper case.
 - The gridTrip function should return a new array of two integers: the final x position and the final y position.  Do not modify the array argument).
 
 Hint:
@@ -872,7 +870,44 @@ gridTrip( [5, 10], 'D5L15U2' ) //-> [2, -5]
 gridTrip( [-22, 100], 'L2L15D50U1D9') //=> [-80, 83]
 -----------------------------------------------------------------*/
 // Your solution for 28-gridTrip here:
-function gridTrip(arr, string) {}
+function gridTrip(arr, string){
+
+  let newArr = [...arr];
+
+  for(let i = 0; i < string.length; i++){
+    if(string[i] === 'U' ||string[i] === 'R' ||string[i] === 'D' || string[i] === 'L' ){
+      let j = i+1;
+      let num = '';
+      let continueLoop = true;
+
+      while(continueLoop){
+
+        if(string[j] === 'U' || string[j] === 'L'|| string[j] === 'R' || string[j] === 'D' || string[j] === undefined){
+          if(string[i] === 'U'){
+            newArr[0] += Number(num)
+          }
+          if(string[i] === 'D'){
+            newArr[0] -= Number(num)
+          }
+          if(string[i] === 'R'){
+            newArr[1] += Number(num)
+          }
+          if(string[i] === 'L'){
+            newArr[1] -= Number(num)
+          }
+          break;
+        }else{
+          num += string[j]
+          j++;
+        }
+
+        console.log('num',num, 'string[j]', string[j])
+      }
+      }
+    }
+    return newArr;
+  }
+
 /*-----------------------------------------------------------------
 Challenge: 29-addChecker
 
@@ -883,7 +918,8 @@ Prompt:
 - Write a function called addChecker that accepts two arguments.
 - The first argument is an array containing at least two integers.  The integers in the array are sorted in ascending order.
 - The second argument is an integer.
-- The addChecker function should return true if there are two integers in the array of integers (first argument) that when added together, equals the integer passed in as the second argument.
+- The addChecker function should return true if there are two integers in the array of integers (first argument) that when added together, 
+equals the integer passed in as the second argument.
 - If there are no two integers in the array that sum up to equal the second argument, addChecker should return false.
 
 Hint:
@@ -898,7 +934,16 @@ addChecker( [10, 15, 16, 22], 32 ) // => true
 addChecker( [10, 15, 16, 22], 19 ) // => false
 -----------------------------------------------------------------*/
 // Your solution for 29-addChecker here:
-function addChecker(arr, n) {}
+function addChecker(arr, n) {
+  for(let i = 0; i < arr.length; i++){
+    for(let j = 0; j < arr.length; j++){
+      if(arr[i] + arr[j] === n){
+        return true;
+      }
+    }
+  }
+return false;
+}
 /*-----------------------------------------------------------------
 Challenge: 30-totalTaskTime
 
