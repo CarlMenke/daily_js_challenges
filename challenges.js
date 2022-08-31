@@ -804,14 +804,12 @@ function toCamelCase(string) {
   if(string.indexOf('-') > -1){
   arr = string.split('-');
   }else{arr = string.split('_');}
-  console.log(arr)
   for(let i = 1; i < arr.length; i++){
     let newStr = '';
     for(let j = 1; j < arr[i].length; j++){
       newStr += arr[i][j]
     }
     arr[i] = arr[i][0].toUpperCase() + newStr;
-    console.log(arr[i][0])
   }
   return arr.join('');
 }
@@ -840,7 +838,17 @@ countTheBits( 255 ) //=> 8
 countTheBits( 65535 )  //=> 16
 -----------------------------------------------------------------*/
 // Your solution for 27-countTheBits here:
-function countTheBits(n) {}
+function countTheBits(n) {
+  let bin = (n >>> 0).toString(2)
+console.log('bin', bin)
+  let newBin = bin.split('');
+console.log('newbin ', newBin)
+  let newerBin = newBin.filter(num => num === '1');
+  console.log('newer bin ' , newerBin)
+
+
+  return newerBin.length 
+}
 /*-----------------------------------------------------------------
 Challenge: 28-gridTrip
 
