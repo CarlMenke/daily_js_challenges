@@ -971,7 +971,85 @@ totalTaskTime( [2, 2, 3, 3, 4, 4], 2 ) //=> 9
 totalTaskTime( [5, 2, 6, 8, 7, 2], 3 ) // => 12
 -----------------------------------------------------------------*/
 // Your solution for 30- here:
-function totalTaskTime(arr, n) {}
+function totalTaskTime(arr, n) {
+  let finalTime = 0;
+  if(arr.length === 0){
+    return 0;
+  }
+
+  // start procecessing the first n number of tasks
+  let threads = {};
+  let totalTime = 0;
+
+    for(let i = 0; i < n; i++){
+      console.log('arr[i]',arr[i])
+        if(arr[0]){
+        threads[`thread${i}`] = arr.shift()
+      }
+    }
+
+    console.log(arr, arr.length,threads)
+    if(arr.length===0){
+      let max = 0; 
+      for(const key in threads){
+        if(threads[key] >= max){
+          max = threads[key]
+        }
+      }
+      return max;
+    }
+
+    const CPU = () =>{
+
+      let min = threads.thread0;
+
+      for(const key in threads){
+        if(threads[key] <= min){
+        min = threads[key];
+        }
+      }
+
+      for(const key in threads){
+
+        if(threads[key] === min){
+
+          totalTime += threads[key];
+          threads[key] = arr.shift();
+
+          console.log('arraylength' , arr.length, 'arr', arr, 'totalTime', totalTime)
+          if(arr.length === 0){
+            
+            let max = 0; 
+            for(const key in threads){
+              if(threads[key] >= max){
+                max = threads[key]
+              }
+            }
+
+            console.log('totalTime += max', totalTime += max)
+           finalTime = totalTime; 
+           return(finalTime)
+          }
+        }else{
+          threads[key] -= min;
+        }
+      }
+      if(finalTime === 0){
+      CPU();
+      }
+    }
+
+    CPU();
+
+
+    return finalTime;
+  // When one of ther task finish do 2 things: 
+      //reduce the other tasks by the time it took to finish that one
+      // add that amount of time to the total time
+  // replace that task with the next task in queue
+  //  repeat until queue is 0
+
+}
 
 /*-----------------------------------------------------------------*/
 module.exports = {
